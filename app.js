@@ -4,14 +4,15 @@ const path = require('path');
 const process = require('process');
 const {authenticate} = require('@google-cloud/local-auth');
 const {google} = require('googleapis');
-const express = require('express');
-const app=express();
 let mailId;
 let replyTemplate;
 let newLableflag;
 let labelId;
+
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/gmail.modify'];
+
+
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
@@ -96,8 +97,6 @@ async function findLabels(auth) {
     console.log(found);
     return found;
 }
-
-
 
 async function checkNewEmails(auth) {
     try {
@@ -214,6 +213,7 @@ async function start(){
     replyTemplate=prompt('Enter your reply template : ');
     newLableflag=prompt('Enter the LABLE name : ');
     await authorize().then(checkNewEmails).catch(console.error);
+
 // Function to repeat the sequence of steps at random intervals
     // function repeatSequence() {
     //     const minInterval = 45000; // 45 seconds
